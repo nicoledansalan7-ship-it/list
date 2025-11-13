@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+
+<style>
+    body {
+        margin: 0; height: 100vh;
+        display: flex; justify-content: center; align-items: center;
+        font-family: Poppins, sans-serif;
+        background: linear-gradient(120deg, #a06bff, #ff70c8, #c47bff, #ff89d1);
+        background-size: 400% 400%;
+        animation: gradientMove 7s ease infinite;
+    }
+    @keyframes gradientMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    .todo-box {
+        background: rgba(255,255,255,0.15);
+        padding: 30px;
+        width: 350px;
+        border-radius: 20px;
+        backdrop-filter: blur(12px);
+        color: white;
+        box-shadow: 0 0 25px rgba(0,0,0,0.25);
+    }
+
+    input {
+        width: 93%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        margin-bottom: 15px;
+        font-size: 15px;
+        background: rgba(255,255,255,0.9);
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #7f32ff;
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: .3s;
+        margin-bottom: 15px;
+    }
+
+    button:hover {
+        background: #6a24d8;
+        transform: scale(1.05);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        background: rgba(255,255,255,0.85);
+        color: #333;
+        margin: 8px 0;
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    li button {
+        width: 70px;
+        height: 35px;
+        background: #ff3e8a;
+        border-radius: 8px;
+    }
+
+</style>
+</head>
+<body>
+
+<div class="todo-box">
+    <h2 style="text-align:center;">To-Do List</h2>
+
+    <input type="text" id="taskInput" placeholder="Add a task...">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+function addTask() {
+    let task = document.getElementById("taskInput").value;
+    if (task === "") return;
+
+    let li = document.createElement("li");
+    li.innerHTML = `${task} <button onclick="this.parentNode.remove()">Delete</button>`;
+    document.getElementById("taskList").appendChild(li);
+
+    document.getElementById("taskInput").value = "";
+}
+</script>
+
+</body>
+</html>
